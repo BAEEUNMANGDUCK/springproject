@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring" xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+
+<!-- <context:property-placeholder location="/WEB-INF/spring/property/real.info.properties" /> -->
+
+
+<!-- MariaDB connection 객체 -->
+
+
+<bean  class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+
+<property value="#{infoProperty['db.driver']}" name="driverClassName"/>
+
+<property value="#{infoProperty['db.url']}" name="url"/>
+
+<property value="#{infoProperty['db.username']}" name="username"/>
+
+<property value="#{infoProperty['db.password']}" name="password"/>
+
+</bean>
+
+<!-- JdbcTemplate 객체 -->
+
+
+
+<bean  class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+
+<property name="dataSource" ref="dataSource"/>
+
+</bean>
+
+<!-- TransactionManager 객체 -->
+
+
+
+<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+
+<property name="dataSource" ref="dataSource"/>
+
+</bean>
+
+</beans>
